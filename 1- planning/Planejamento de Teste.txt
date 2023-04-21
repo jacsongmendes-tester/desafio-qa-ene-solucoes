@@ -1,0 +1,136 @@
+Cenários Validação Blog da Ene Soluções 
+
+Cenário 01: Validar carregamento do blog da Ene
+Dado que eu acesso a página da Ene Soluções
+Quando clico no botão "Blog"
+Então devo visualizar a página do blog da Ene
+
+Cenário 02: Pesquisar tecnologia "UI/UX" no blog da Ene
+Dado que eu acesso a página do blog da Ene
+E pesquiso pela tecnologia "UI/UX"
+Quando clico no botão "Pesquisar"
+Então devo visualizar as tecnologias relacionadas no blog da Ene
+
+Cenário 03: Pesquisar tecnologia não existente no blog da Ene
+Dado que eu acesso a página do blog da Ene
+E pesquiso pela tecnologia "Não Existe"
+Quando clico no botão "Pesquisar"
+Então devo visualizar a lista vazia e a mensagem "Nenhum resultado encontrado!"
+
+Cenário 04: Validar o carrossel de notícias no blog da Ene
+Dado que eu acesso a página do blog da Ene
+E visualizo a seção do carrossel de notícias
+Quando clico no botão "Próximo" do carrossel
+Então devo visualizar uma nova notícia no blog da Ene
+
+Cenário 05: Validar post de uma notícia do carrossel no blog da Ene
+Dado que eu acesso a página do blog da Ene
+E visualizo a seção do carrossel de notícias
+Quando clico no botão "Ler mais"
+Então devo visualizar a página da notícia no blog da Ene
+
+Cenário 06: Validar seção de notícias mais recentes no blog da Ene
+Dado que eu acesso a página do blog da Ene
+Quando realizo a ação de rolagem da página
+Então devo visualizar a seção de notícias mais recentes no blog da Ene
+
+Cenário 07: Validar visualização de todas as notícias mais recentes
+Dado que eu acesso a página do blog da Ene
+E realizo a ação de rolagem da página
+Quando clico no botão "ver tudo"
+Então devo visualizar todas as notícias mais recentes
+
+Cenário 08: Validar filtro por categoria da seção mais recentes
+Dado que eu acesso a página do blog da Ene
+E realizo a ação de rolagem da página
+Quando clico no filtro "Todas as categorias"
+Então devo visualizar notícias mais recentes de todas as categorias
+
+Cenário 09: Cadastrar email válido para boletim de notícias
+Dado que eu acesso a página do blog da Ene
+E realizo a ação de rolagem da página
+Quando inserir o endereço de email válido
+E clicar no botão "Enviar"
+Então devo visualizar uma caixa de diálogo com a mensagem de sucesso
+
+Cenário 10: Cadastrar email inválido para boletim de notícias
+Dado que eu acesso a página do blog da Ene
+E realizo a ação de rolagem da página
+Quando inserir um endereço de email inválido
+Então devo visualizar uma mensagem de erro indicando que o endereço de email é inválido
+
+Cenário 11: Validar chat com especialista
+Dado que eu acesso a página do blog da Ene
+E clico no ícone de WhatsApp
+E preencho o formulário de dados
+Quando clico no botão "Iniciar Conversa"
+Então devo ser redirecionado para o WhatsApp
+
+Cenário 12: Validar link externo do Instagram
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no ícone do Instagram
+Então devo ser redirecionado para o Instagram
+
+Cenário 13: Validar link externo do Linkedin
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no ícone do Linkedin
+Então devo ser redirecionado para o Linkedin
+
+Cenário 14: Validar link externo do endereço Mapa
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no label do endereço da Ene
+Então devo ser redirecionado para o Mapa
+
+Cenário 15: Validar link externo whatsapp pelo numero
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no label com numero da Ene
+Então devo ser redirecionado para whatsapp 
+
+Cenário 16: Validar link externo envio de email
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no label com email da Ene
+Então devo ser redirecionado para envio de email 
+
+Cenário 17: Validar seção Termos de uso
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no label termos de uso
+Então devo ser redirecionado para seção termos de uso
+
+Cenário 18: Validar seção Politicas de privacidade
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no label Politicas de privacidade
+Então devo ser redirecionado para seção Politicas de privacidade
+
+Cenário 19: Validar seção DPC
+Dado que eu acesso a página do blog da Ene
+E realizo rolagem da página para rodapé
+Quando clico no label DPC
+Então devo ser redirecionado para seção DPC
+
+Cenário 20: Validar redirecionamento para página de Serviços 
+Dado que eu acesso a página do blog da Ene
+Quando clico no label Serviços 
+Então devo ser redirecionado para página de Serviços 
+
+Cenário 21: Validar redirecionamento para página de Contato 
+Dado que eu acesso a página do blog da Ene
+Quando clico no label Contato 
+Então devo ser redirecionado para página de Contato 
+
+Cenario 22: Validar redirecionamento para página de Vagas 
+Dado que eu acesso a página do blog da Ene
+Quando clico no label Vagas 
+Então devo ser redirecionado para página de Vagas 
+
+Cenario 22: Validar redirecionamento para página de Contratar 
+Dado que eu acesso a página do blog da Ene
+Quando clico no label Contratar 
+Então devo ser redirecionado para página de Contratar 
+

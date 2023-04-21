@@ -1,0 +1,21 @@
+{
+  "name": "ene-e2e-automation",
+  "version": "1.0.0",
+  "description": "Ene end to end automation project.",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run"
+
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/support/steps/*.{js,ts}",
+    "filterSpecs": true,
+    "omitFiltered": true
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^16.0.3",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "cypress": "^12.10.0"
+  }
+}

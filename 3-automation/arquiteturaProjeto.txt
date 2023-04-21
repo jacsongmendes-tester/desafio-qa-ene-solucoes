@@ -1,0 +1,224 @@
+Este documento foi criado para que você possa entender a arquitetura do Projeto
+
+Por que Cypress?
+O Cypress é uma ferramenta de teste de front-end de próxima geração que resolve os principais problemas que os engenheiros de controle de qualidade enfrentam ao testar aplicativos modernos.
+
+Por que escolhi usar o padrão de design de objeto de página?
+O Page Object Model é um padrão de design no mundo da automação de testes muito utilizado devido à sua capacidade de facilitar a manutenção dos testes e evitar a duplicação de código. 
+
+Quais são os benefícios de usar o padrão de objeto de página?
+O padrão fornece muita flexibilidade para escrever código, então temos os principais ganhos usando o Page Object Model:
+
+Reutilização de código:
+A mesma classe de página pode ser usada em diferentes testes e todos os localizadores e seus métodos podem ser reutilizados em vários casos de teste.
+
+Manutenibilidade do código:
+Há uma separação clara entre os casos de teste, que podem ser nossos cenários funcionais e o código específico da página, como localizadores e métodos. Então, se alguma mudança estrutural acontecer na página da web, ela afetará apenas o objeto da página, facilitando a correção e mitigação do impacto em vários casos de teste.
+
+Esta é a estrutura de pastas do projeto:
+ene-e2e-automation
+├─ cypress
+│  ├─ e2e
+│  │  └─ blogEne.feature
+│  ├─ fixtures
+│  │  └─ example.json
+│  └─ support
+│     ├─ commands
+│     │  └─ commands.js
+│     ├─ elements
+│     │  ├─ blogElements.js
+│     │  └─ eneSolucoesElements.js
+│     ├─ index.js
+│     ├─ pageobjects
+│     │  └─ blogPage.js
+│     └─ steps
+│     │ └─ blogSteps.js
+│     │ commands.js
+│     │ e2e.js
+├─ node_modules
+├─ cypress.config.js
+├─ package-lock.json
+├─ package.json
+└─ README.md
+
+Legenda:
+fixtures - Dados de teste
+e2e - Testes
+Support - Scripts reutilizáveis e objetos de página
+node_modules - Módulos para Cypress
+cypress.config.js - Configuração do Cypress
+package.json Dependências para Cypress
+
+
+Uso/Exemplos
+
+Mapeando os elementos: ../support/elements
+
+class eneSolucoesElements {
+    buttonBlog = () => {
+        return 'div[class="sm:hidden md:hidden lg:flex flex-grow items-center"] a[href="/blog"]'
+    }
+}
+  
+export default eneSolucoesElements;
+
+
+Criando a classe para pageObject: ../support/pageobjects/
+import blogElements from '../elements/blogElements';
+const BlogElements = new blogElements
+import eneSolucoesElements from '../elements/eneSolucoesElements';
+const EneSolucoesElements = new eneSolucoesElements
+class blogPage {
+    acessarPaginaEneSolucoes (){ 
+        cy.visit("/")
+    }   
+
+    acessarPaginaBlogEne(){
+        cy.get(EneSolucoesElements.buttonBlog())
+            .click()
+                .first()
+        
+        cy.get(BlogElements.aceitarCookie())
+            .click()
+
+    }
+
+    visualizarPaginaBlog(){
+        cy.url()
+            .should('eq', Cypress.config("baseUrl")+"/blog")
+        
+        cy.get(BlogElements.textoPrincipalBlog())
+            .contains('As principais novidades do mundo da tecnologia você encontra aqui.')
+    }
+
+    pesquisarTecnologia(tecnologia){
+        cy.get(BlogElements.inputPesquisar())
+            .type(tecnologia)
+    }
+
+    clicarBotaoPesquisar(){
+        cy.get(BlogElements.botaoPesquisar())
+            .click()
+    }
+
+    visualizarTecnologias(){
+        cy.get(BlogElements.resultadoPesquisa())
+            .should('not.be.empty')
+    }
+
+    visualizarListaVazia(mensagemNenhumResultado){
+        cy.get(BlogElements.resultadoPesquisaVazio())
+            .contains(mensagemNenhumResultado )
+    }
+
+    inserirEmail (email){
+        cy.get(BlogElements.campoEmail())
+            .type(email)
+    }
+
+    clicarBotaoEnviar(){
+        cy.get(BlogElements.botaoEnviarEmail())
+            .click()
+    }
+    
+    validarSucessoEnvioEmail (){
+        cy.get(BlogElements.dialogoSucessoEmail())
+            .contains('PARABÉNS!')
+    }
+
+    validarMensagemErro(mensagemErroEmail){
+        cy.get(BlogElements.mensagemErroEmail())
+            .contains(mensagemErroEmail)
+    }
+}
+
+export default blogPage;
+
+Gerandos os Passos: ../support/steps/
+
+import { When, Then, Given} from "@badeball/cypress-cucumber-preprocessor"
+import blogPage from "../pageobjects/blogPage"
+const BlogPage = new blogPage
+
+Given("que eu acesso a página da Ene Soluções", () => {
+	BlogPage.acessarPaginaEneSolucoes();
+})
+
+Then("clico no botão Blog", () => {
+	BlogPage.acessarPaginaBlogEne();
+})
+
+Then("devo visualizar a página do blog da Ene", () => {
+	BlogPage.visualizarPaginaBlog();
+})
+
+Then("pesquiso pela tecnologia {string}", (tecnologia) => {
+	BlogPage.pesquisarTecnologia(tecnologia);
+})
+
+When("clico no botão Pesquisar", () => {
+	BlogPage.clicarBotaoPesquisar();
+})
+
+Then("devo visualizar as tecnologias relacionadas no blog da Ene", () => {
+	BlogPage.visualizarTecnologias();
+})
+
+Then("Então devo visualizar a lista vazia e a mensagem {string}", (mensagemNenhumResultado) => {
+	BlogPage.visualizarListaVazia(mensagemNenhumResultado);
+})
+
+Then("inserir o endereço de email válido", () => {
+	BlogPage.inserirEmail("automacao-ene-solucoes@gmail.com")
+})
+
+Then("clicar no botão Enviar", () => {
+	BlogPage.clicarBotaoEnviar()
+})
+
+Then("devo visualizar uma caixa de diálogo com a mensagem de sucesso", () => {
+	BlogPage.validarSucessoEnvioEmail()
+})
+
+Then("inserir um endereço de email inválido", () => {
+	BlogPage.inserirEmail("automacao-ene-solucoes")
+})
+
+Then("devo visualizar uma mensagem de erro {string}", (mensagemErroEmail) => {
+	BlogPage.validarMensagemErro(mensagemErroEmail)
+})
+
+Criando o arquivo de teste: ../e2e/
+
+Feature: Validando Blog da Ene Solucoes 
+    Background: Accesse o Blog da Ene
+    Given que eu acesso a página da Ene Soluções
+    And clico no botão Blog
+
+Scenario: Validar carregamento do blog da Ene
+    Then devo visualizar a página do blog da Ene
+
+Scenario: Pesquisar tecnologia UI/UX no blog da Ene
+    And pesquiso pela tecnologia "UI/UX"
+    When clico no botão Pesquisar
+    Then devo visualizar as tecnologias relacionadas no blog da Ene
+
+Scenario: Pesquisar tecnologia não existente no blog da Ene
+    And pesquiso pela tecnologia "VAZIA"
+    When clico no botão Pesquisar
+    Then Então devo visualizar a lista vazia e a mensagem "Nenhum resultado encontrado!"
+
+Scenario: Cadastrar email válido para boletim de notícia
+    And inserir o endereço de email válido
+    When clicar no botão Enviar
+    Then devo visualizar uma caixa de diálogo com a mensagem de sucesso
+
+Scenario: Cadastrar email inválido para boletim de notícias
+    When inserir um endereço de email inválido
+    Then devo visualizar uma mensagem de erro "Insira um e-mail válido."
+
+
+
+
+
+
