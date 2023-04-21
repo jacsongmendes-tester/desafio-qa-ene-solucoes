@@ -7,7 +7,7 @@
 - Saber trabalhar com Javascript e Cypress
 - [NodeJS](https://nodejs.org/en/) - Se você estiver no MAC ou Linux, você pode usar [NVM](https://github.com/nvm-sh/nvm) para gerenciar versões do Node
 - Aplicativo de terminal de sua preferência - Você pode usar o terminal integrado no Visual Studio Code
-- Code editor - Recomendação é usar [VSCode](https://code.visualstudio.com/)
+- Editor de Código - Recomendação é usar [VSCode](https://code.visualstudio.com/)
 ## Execução local
 
 Esta seção ajudará você a executar testes de automação com base em nosso projeto. Siga estas etapas para executar:
